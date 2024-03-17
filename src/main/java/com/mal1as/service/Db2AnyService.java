@@ -9,8 +9,12 @@ import java.util.Map;
 @Service
 public class Db2AnyService {
 
+    private final Db2AnyRepository db2AnyRepository;
+
     @Autowired
-    private Db2AnyRepository db2AnyRepository;
+    public Db2AnyService(Db2AnyRepository db2AnyRepository) {
+        this.db2AnyRepository = db2AnyRepository;
+    }
 
     public Map<String, Object> getAnyEntityByKey(String key) {
         return db2AnyRepository.getAllFieldsByKey(key);

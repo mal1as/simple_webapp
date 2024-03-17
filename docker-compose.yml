@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  db:
+    image: "az82/docker-derby"
+    environment:
+      DERBY_USER: uname
+      DERBY_PASSWORD: pass
+    ports:
+      - "1527:1527"
