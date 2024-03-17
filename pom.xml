@@ -14,6 +14,7 @@
     <lombok.version>1.18.22</lombok.version>
     <jackson.version>2.6.1</jackson.version>
     <servlet.version>3.1.0</servlet.version>
+    <guava.collections.version>1.0</guava.collections.version>
   </properties>
 
   <dependencies>
@@ -86,7 +87,7 @@
     <dependency>
       <groupId>com.google.collections</groupId>
       <artifactId>google-collections</artifactId>
-      <version>1.0</version>
+      <version>${guava.collections.version}</version>
     </dependency>
 
     <dependency>
