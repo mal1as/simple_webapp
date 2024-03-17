@@ -1,6 +1,7 @@
 package com.mal1as.controller;
 
-import com.mal1as.dto.SuccessResponseDTO;
+import com.mal1as.dto.ExtendedResponseDTO;
+import com.mal1as.exception.RequestValidationException;
 import com.mal1as.service.Db2AnyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @EnableWebMvc
@@ -26,9 +28,13 @@ public class GetAnyController {
     }
 
     @RequestMapping(path = "/bykey/getjson", method = RequestMethod.GET)
-    public ResponseEntity<SuccessResponseDTO> getJsonEntityByKey(@RequestParam String key) {
+    public ResponseEntity<ExtendedResponseDTO> getJsonEntityByKey(@RequestParam(required = false) String key) {
+        if(Objects.isNull(key)) {
+            throw new RequestValidationException("Request parameter 'key' is required");
+        }
+
         Map<String, Object> anyEntityByKey = db2AnyService.getAnyEntityByKey(key);
-        return ResponseEntity.ok(SuccessResponseDTO.builder()
+        return ResponseEntity.ok(ExtendedResponseDTO.builder()
                 .data(anyEntityByKey)
                 .request(key)
                 .response(HttpStatus.OK.getReasonPhrase())

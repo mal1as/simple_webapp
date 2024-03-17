@@ -1,10 +1,12 @@
 package com.mal1as.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.servlet.ServletContext;
+import java.util.Collections;
 import java.util.Map;
 
 @Repository
@@ -20,6 +22,10 @@ public class Db2AnyRepository {
     }
 
     public Map<String, Object> getAllFieldsByKey(String key) {
-        return jdbcTemplate.queryForMap(query, key);
+        try {
+            return jdbcTemplate.queryForMap(query, key);
+        } catch (EmptyResultDataAccessException e) {
+            return Collections.emptyMap();
+        }
     }
 }

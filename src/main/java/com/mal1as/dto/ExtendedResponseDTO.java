@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Data
 @Builder
-public class SuccessResponseDTO {
+public class ExtendedResponseDTO {
 
     private Map<String, Object> data;
     private String response;
